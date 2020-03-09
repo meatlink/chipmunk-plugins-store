@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - tmp         # Push events on master branch
+      # - master         # Push events on master branch
     tags:
       - '*'
 
@@ -13,7 +14,8 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        os: [ubuntu-latest, macOS-latest, windows-2016]
+        os: [macOS-latest]
+        # os: [ubuntu-latest, macOS-latest, windows-2016]
         rust: [stable]
     steps:
       - name: Checkout
@@ -76,7 +78,6 @@ jobs:
           SIGNING_ID: ${{ secrets.SIGNING_ID }}
           KEYCHAIN_PWD: ${{ secrets.KEYCHAIN_PWD }}
           SKIP_NOTARIZE: ${{ secrets.SKIP_NOTARIZE }}
-          CHIPMUNK_DEVELOPER_ID: ${{ secrets.CHIPMUNK_DEVELOPER_ID }}
       - name: Release
         uses: meatlink/action-gh-release@fix-econnreset
         if: startsWith(github.ref, 'refs/tags/')
