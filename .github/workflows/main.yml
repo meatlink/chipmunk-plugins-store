@@ -3,7 +3,7 @@ name: Building
 on:
   push:
     branches:
-      - master         # Push events on master branch
+      - tmp         # Push events on master branch
     tags:
       - '*'
 
